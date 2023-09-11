@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+import ChartPage from '@/pages/ChartPage';
+import { registChartJS } from '@/utils';
 
-import router from '@/routers/router';
+registChartJS();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <ChartPage />
+    </BrowserRouter>
   </React.StrictMode>,
 );
