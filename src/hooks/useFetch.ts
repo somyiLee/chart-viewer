@@ -1,34 +1,30 @@
-import { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 import httpClient from '@/api/client';
-import { ChartItem } from '@/types';
 import { getChartData } from '@/utils';
-
-interface ChartDataState extends ChartData<'bar' | 'line', ChartItem[]> {}
+import { useSetRecoilState } from 'recoil';
+import { ChartState } from '@/recoil/atom';
 
 export const useFetch = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const setChartData = useSetRecoilState(ChartState);
 
-  const [chartData, setChartData] = useState<ChartDataState>({ datasets: [] });
+  const loadData = async () => {
+    setIsLoading(true);
+
+    const responseData = await httpClient.loadData();
+    if (!responseData) return;
+
+    const fetchedChartData = getChartData(responseData);
+    setChartData(fetchedChartData);
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
-
-      const responseData = await httpClient.loadData();
-
-      if (!responseData) return;
-
-      setChartData(getChartData(responseData));
-
-      setIsLoading(false);
-    };
-
     loadData();
   }, []);
 
   return {
-    chartData,
     isLoading,
   };
 };
