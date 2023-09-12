@@ -1,6 +1,4 @@
 import { AREA_KEY, BAR_KEY } from '@/constant';
-import { ChartData } from 'chart.js';
-import { ChartDataType } from '.';
 
 export type LocationDataType = {
   id: string;
@@ -11,7 +9,7 @@ export type LocationDataType = {
 export type LocationDataKey = string;
 
 export type ResponseData = {
-  [t: LocationDataKey]: LocationDataType;
+  [k: LocationDataKey]: LocationDataType;
 };
 
 export type ResponseType = {
@@ -19,5 +17,3 @@ export type ResponseType = {
   version: number;
   response: ResponseData;
 };
-
-export interface ChartDataState extends ChartData<'bar' | 'line', ChartDataType[]> {}
