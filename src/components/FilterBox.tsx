@@ -40,7 +40,7 @@ const FilterBtnWrap = styled.div`
 
 const FilterBtn = styled.button<FilterBtnProps>`
   margin: 0px 5px;
-  padding: 5px 11px;
+  padding: 5px 10px;
   background-color: ${({ $isSelected }) => ($isSelected ? COLORS.purple.dark : '#fff')};
   border: 1px solid ${COLORS.purple.dark};
   border-radius: 5px;
